@@ -9,7 +9,7 @@ You spend your life investigating the unknown. I thought you deserved a little m
 
 Happy birthday.
 
-— Player 2
+— Gaurav 
 `.trim();
 
 export const LETTER_SIGNATURE = "For Ritu, always. — Player 2";
