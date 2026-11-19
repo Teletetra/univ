@@ -1,26 +1,196 @@
 @import "tailwindcss";
 
+/* ---------- Tokens ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --void: #090d1b;
+  --midnight: #171c38;
+  --surface: #11182b;
+  --surface-raised: #18223a;
+  --border: #26324b;
+  --foreground: #edf0fa;
+  --muted: #929fbd;
+  --dim: #7685a7;
+  --quantum: #7469d8;
+  --nebula: #b8a4ff;
+  --starlight: #e8ddf8;
+  --warmth: #d6b99a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--void);
+  color: var(--foreground);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 75% 0%, rgba(116, 105, 216, 0.14), transparent 42%),
+    radial-gradient(ellipse at 10% 90%, rgba(214, 185, 154, 0.06), transparent 36%),
+    var(--void);
+  font-family: var(--font-sans), Inter, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: rgba(148, 133, 237, 0.35);
+  color: var(--starlight);
+}
+
+/* ---------- Typography helpers ---------- */
+.font-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+.font-hand {
+  font-family: var(--font-hand), "Caveat", cursive;
+}
+
+.lab-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.dim {
+  color: var(--dim);
+}
+
+/* ---------- Panels / surfaces ---------- */
+.panel {
+  background: rgba(17, 24, 43, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+}
+
+.panel-raised {
+  background: rgba(24, 34, 58, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.achievement {
+  border: 1px solid #3b3470;
+  background: #1d1a36;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+/* ---------- Glow ---------- */
+.glow-text {
+  text-shadow: 0 0 24px rgba(184, 164, 255, 0.35);
+}
+
+.glow-ring {
+  box-shadow:
+    0 0 0 1px rgba(184, 164, 255, 0.2),
+    0 0 40px rgba(116, 105, 216, 0.35);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3350;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b4568;
+}
+
+/* ---------- Focus ---------- */
+:focus-visible {
+  outline: 2px solid var(--nebula);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- Sliders ---------- */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--quantum), #2a3350);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--starlight);
+  border: 2px solid var(--quantum);
+  box-shadow: 0 0 10px rgba(148, 133, 237, 0.6);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--starlight);
+  border: 2px solid var(--quantum);
+  box-shadow: 0 0 10px rgba(148, 133, 237, 0.6);
+  cursor: pointer;
+}
+
+/* ---------- KaTeX tweak ---------- */
+.katex {
+  color: var(--starlight);
+}
+
+/* ---------- Motion ---------- */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }
